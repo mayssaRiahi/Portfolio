@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riahi Mayssa — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E1217;
+    --bg-alt:#0B0E13;
+    --panel:#161B24;
+    --panel-soft:#13171F;
+    --border:#262E3A;
+    --text:#E7EBF0;
+    --muted:#8B96A8;
+    --amber:#E3A23B;
+    --teal:#5FC9BA;
+    --amber-dim:rgba(227,162,59,0.12);
+    --teal-dim:rgba(95,201,186,0.12);
+    --radius:10px;
+    --container:1120px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img,svg{display:block;}
+
+  a{color:inherit;text-decoration:none;}
+
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif;font-weight:600;letter-spacing:-0.01em;}
+
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px;}
+
+  /* ---------- Layout helpers ---------- */
+  .section{
+    max-width:var(--container);
+    margin:0 auto;
+    padding:96px 32px;
+  }
+  @media (max-width:700px){
+    .section{padding:64px 20px;}
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--amber);
+    letter-spacing:0.04em;
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    display:inline-block;
+    width:18px;height:1px;
+    background:var(--amber);
+  }
+
+  .section-title{
+    font-size:clamp(1.7rem, 3.4vw, 2.4rem);
+    margin-bottom:8px;
+  }
+  .section-sub{
+    color:var(--muted);
+    max-width:620px;
+    margin-bottom:48px;
+    font-size:0.98rem;
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    background:rgba(14,18,23,0.78);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:var(--container);
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-logo{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1rem;
+    letter-spacing:0.02em;
+  }
+  .nav-logo .dot{color:var(--amber);}
+  .nav-links{
+    display:flex;
+    gap:32px;
+    font-size:0.92rem;
+  }
+  .nav-links a{
+    color:var(--muted);
+    transition:color 0.2s ease;
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-toggle{
+    display:none;
+    background:none;
+    border:1px solid var(--border);
+    color:var(--text);
+    width:38px;height:38px;
+    border-radius:6px;
+    font-size:1.1rem;
+    cursor:pointer;
+  }
+  @media (max-width:760px){
+    .nav-links{
+      position:absolute;
+      top:100%;left:0;right:0;
+      background:var(--bg-alt);
+      border-bottom:1px solid var(--border);
+      flex-direction:column;
+      gap:0;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.3s ease;
+    }
+    .nav-links.open{max-height:320px;}
+    .nav-links a{
+      padding:16px 32px;
+      border-bottom:1px solid var(--border);
+    }
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding-top:140px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:-180px; right:-180px;
+    width:480px;height:480px;
+    background:radial-gradient(circle, var(--amber-dim) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:64px;
+    align-items:center;
+  }
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:48px;}
+    .hero{padding-top:120px;}
+  }
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:var(--teal);
+    background:var(--teal-dim);
+    border:1px solid rgba(95,201,186,0.3);
+    padding:7px 14px;
+    border-radius:999px;
+    margin-bottom:28px;
+  }
+  .badge-dot{
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--teal);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:0.35;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .badge-dot{animation:none;}
+  }
+
+  .hero-title{
+    font-size:clamp(2.6rem, 7vw, 4.4rem);
+    line-height:1.05;
+    margin-bottom:14px;
+  }
+  .hero-role{
+    font-size:clamp(1.05rem, 2.4vw, 1.3rem);
+    color:var(--amber);
+    font-weight:500;
+    margin-bottom:20px;
+  }
+  .hero-desc{
+    color:var(--muted);
+    max-width:520px;
+    margin-bottom:32px;
+    font-size:1rem;
+  }
+  .hero-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:32px;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.9rem;
+    padding:13px 24px;
+    border-radius:6px;
+    border:1px solid transparent;
+    transition:transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+    display:inline-block;
+  }
+  .btn-primary{
+    background:var(--amber);
+    color:#1A1404;
+    font-weight:500;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{
+    border-color:var(--border);
+    color:var(--text);
+  }
+  .btn-ghost:hover{
+    border-color:var(--amber);
+    color:var(--amber);
+    transform:translateY(-2px);
+  }
+  .hero-meta{
+    color:var(--muted);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+  }
+
+  /* ---------- Terminal ---------- */
+  .terminal{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 24px 60px -24px rgba(0,0,0,0.6);
+  }
+  .terminal-bar{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 16px;
+    border-bottom:1px solid var(--border);
+    background:var(--panel-soft);
+  }
+  .terminal-bar .dot{
+    width:11px;height:11px;
+    border-radius:50%;
+    background:var(--border);
+  }
+  .terminal-bar .dot:nth-child(1){background:#5A6473;}
+  .terminal-bar .dot:nth-child(2){background:var(--amber);opacity:0.6;}
+  .terminal-bar .dot:nth-child(3){background:var(--teal);opacity:0.6;}
+  .terminal-title{
+    margin-left:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--muted);
+  }
+  .terminal-body{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.86rem;
+    padding:24px;
+    min-height:300px;
+    line-height:1.85;
+  }
+  .term-line{white-space:pre-wrap;}
+  .term-cmd{color:var(--amber);}
+  .term-out{color:var(--muted);}
+  .term-status{color:var(--teal);font-weight:500;}
+  .term-cursor{
+    display:inline-block;
+    width:8px;height:1em;
+    background:var(--teal);
+    vertical-align:text-bottom;
+    margin-left:2px;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  @media (prefers-reduced-motion: reduce){
+    .term-cursor{animation:none;}
+  }
+
+  /* ---------- Timeline ---------- */
+  .timeline{
+    border-left:1px solid var(--border);
+    padding-left:32px;
+    display:flex;
+    flex-direction:column;
+    gap:36px;
+  }
+  .timeline-item{position:relative;}
+  .timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-37px; top:6px;
+    width:11px;height:11px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--amber);
+  }
+  .timeline-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--amber);
+    margin-bottom:6px;
+  }
+  .timeline-item h3{
+    font-size:1.1rem;
+    margin-bottom:4px;
+  }
+  .timeline-sub{
+    color:var(--teal);
+    font-size:0.9rem;
+    margin-bottom:8px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .timeline-item p{
+    color:var(--muted);
+    font-size:0.95rem;
+    max-width:600px;
+  }
+  .timeline-item ul{
+    color:var(--muted);
+    font-size:0.95rem;
+    margin-top:8px;
+    padding-left:20px;
+    max-width:600px;
+  }
+  .timeline-item li{margin-bottom:4px;}
+
+  .subsection-title{
+    font-size:1.2rem;
+    margin:48px 0 24px;
+    color:var(--text);
+  }
+  .subsection-title:first-of-type{margin-top:0;}
+
+  /* ---------- Project cards ---------- */
+  .project-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:24px;
+  }
+  .project-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:28px;
+    display:flex;
+    flex-direction:column;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .project-card:hover{
+    border-color:var(--amber);
+    transform:translateY(-4px);
+  }
+  .project-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:12px;
+  }
+  .project-head h3{font-size:1.15rem;}
+  .project-year{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+  .project-desc{
+    color:var(--muted);
+    font-size:0.95rem;
+    margin-bottom:20px;
+    flex-grow:1;
+  }
+  .project-cover{
+    width:100%;
+    max-height:280px;
+    object-fit:cover;
+    border-radius:6px;
+    border:1px solid var(--border);
+    background:var(--panel-soft);
+    margin-bottom:18px;
+    display:block;
+  }
+
+  .project-video{
+    width:100%;
+    max-height:280px;
+    object-fit:cover;
+    border-radius:6px;
+    border:1px solid var(--border);
+    background:var(--panel-soft);
+    margin-bottom:18px;
+    display:block;
+  }
+
+  .project-gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(100px, 1fr));
+    gap:8px;
+    margin-bottom:18px;
+  }
+  .project-thumb{
+    width:100%;
+    height:100px;
+    object-fit:cover;
+    border-radius:6px;
+    border:1px solid var(--border);
+    cursor:zoom-in;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .project-thumb:hover{
+    border-color:var(--amber);
+    transform:scale(1.03);
+  }
+
+  .lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(11,14,19,0.92);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+    z-index:200;
+    cursor:zoom-out;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{
+    max-width:100%;
+    max-height:100%;
+    border-radius:8px;
+    border:1px solid var(--border);
+  }
+
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--teal);
+    background:var(--teal-dim);
+    border:1px solid rgba(95,201,186,0.25);
+    padding:4px 10px;
+    border-radius:999px;
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    gap:20px;
+  }
+  .skill-group{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:24px;
+  }
+  .skill-path{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    color:var(--amber);
+    margin-bottom:16px;
+  }
+  .skill-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .skill-tags .tag{
+    color:var(--text);
+    background:var(--panel-soft);
+    border-color:var(--border);
+  }
+
+  /* ---------- Languages ---------- */
+  .lang-grid{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+    max-width:520px;
+  }
+  .lang-row{
+    display:grid;
+    grid-template-columns:140px 1fr auto;
+    align-items:center;
+    gap:16px;
+  }
+  .lang-name{font-weight:500;}
+  .lang-level{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--muted);
+    text-align:right;
+  }
+  .lang-bar{
+    height:6px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:999px;
+    overflow:hidden;
+  }
+  .lang-bar-fill{
+    height:100%;
+    background:var(--amber);
+    border-radius:999px;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  @media (max-width:700px){
+    .contact-wrap{grid-template-columns:1fr;}
+  }
+  .contact-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:24px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .contact-card:hover{
+    border-color:var(--teal);
+    transform:translateY(-3px);
+  }
+  .contact-icon{
+    width:42px;height:42px;
+    border-radius:8px;
+    background:var(--panel-soft);
+    border:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--teal);
+    font-size:1rem;
+    flex-shrink:0;
+  }
+  .contact-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--muted);
+    margin-bottom:4px;
+  }
+  .contact-value{font-size:0.98rem;word-break:break-word;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--border);
+    padding:32px;
+    text-align:center;
+    color:var(--muted);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#accueil" class="nav-logo">mayssa<span class="dot">.</span>riahi</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#parcours">Parcours</a>
+      <a href="#experience">Expérience</a>
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="accueil" class="hero">
+  <div class="section">
+    <div class="hero-grid">
+      <div>
+        <span class="badge"><span class="badge-dot"></span> Disponible pour stages &amp; projets freelance</span>
+        <h1 class="hero-title">Riahi<br>Mayssa</h1>
+        <p class="hero-role">Étudiante Ingénieure en Informatique — Future Spécialiste Cybersécurité</p>
+        <p class="hero-desc">
+          Profil full-stack (Angular, Laravel, Spring Boot, Flask) en cours de spécialisation
+          en sécurité informatique. J'aime concevoir des applications fiables, de l'architecture
+          backend jusqu'à l'interface, avec une attention particulière portée à la sécurité des données.
+        </p>
+        <div class="hero-actions">
+          <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+          <a href="#contact" class="btn btn-ghost">Me contacter</a>
+        </div>
+        <div class="hero-meta">📍 Tunis, Tunisie</div>
+      </div>
+
+      <div class="terminal" aria-hidden="true">
+        <div class="terminal-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="terminal-title">profil.sh</span>
+        </div>
+        <div class="terminal-body" id="terminalBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours" class="section">
+  <div class="eyebrow">~/parcours</div>
+  <h2 class="section-title reveal">Formation</h2>
+  <p class="section-sub reveal">Du baccalauréat scientifique à la cybersécurité, en passant par une licence majorée.</p>
+
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-date">2025 — Présent</div>
+      <h3>Cycle Ingénieur en Informatique</h3>
+      <div class="timeline-sub">iTeam Université, Tunis</div>
+      <p>Spécialisation prévue : Sécurité Informatique / Cybersécurité.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2021 — 2024</div>
+      <h3>Licence en Sciences Informatiques</h3>
+      <div class="timeline-sub">ISSAT Mateur, Tunisie</div>
+      <p>Mention Très Bien — Major de promotion.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2021</div>
+      <h3>Baccalauréat en Sciences Informatiques</h3>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="eyebrow">~/experience</div>
+  <h2 class="section-title reveal">Expériences professionnelles</h2>
+  <p class="section-sub reveal">Des stages orientés développement web, du front-end institutionnel à l'application métier full-stack.</p>
+
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-date">Fév 2024 — Mai 2024</div>
+      <h3>Stage de Fin d'Études (PFE) — Développeuse Web Full-Stack</h3>
+      <div class="timeline-sub">Banque Tunisienne de Solidarité (BTS), Tunis</div>
+      <ul>
+        <li>Conception et développement d'une application web d'éducation financière pour jeunes entrepreneurs.</li>
+        <li>Analyse des besoins, spécifications techniques et modélisation d'architecture via diagrammes UML.</li>
+      </ul>
+      <div class="tag-row" style="margin-top:14px;">
+        <span class="tag">Angular</span><span class="tag">Spring Boot</span><span class="tag">MySQL</span><span class="tag">REST API</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Août 2023 — Sept 2023</div>
+      <h3>Stage d'Initiation — Développeuse Front-end</h3>
+      <div class="timeline-sub">Chakira Cable (Groupe Elloumi), Tunis</div>
+      <ul>
+        <li>Création, maquettage UI/UX et déploiement du site web institutionnel responsive de l'entreprise.</li>
+      </ul>
+      <div class="tag-row" style="margin-top:14px;">
+        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Bootstrap</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets" class="section">
+  <div class="eyebrow">~/projets</div>
+  <h2 class="section-title reveal">Projets académiques</h2>
+  <p class="section-sub reveal">Quatre projets représentatifs : une plateforme institutionnelle, une boutique en ligne, une application interactive et une plateforme de don.</p>
+
+  <div class="project-grid reveal">
+    <article class="project-card">
+      <div class="project-head">
+        <h3>E-Wathiqa</h3>
+        <span class="project-year">PFA · 2026</span>
+      </div>
+      <video class="project-video" controls preload="metadata" poster="images/ewathiqa-poster.png">
+        <source src="images/ewathiqa-demo.mp4" type="video/mp4">
+      </video>
+      <p class="project-desc">
+        Plateforme de digitalisation des flux administratifs (CIN, passeport, certificat de résidence),
+        conçue selon le modèle de cycle de vie en Cascade. Authentification sécurisée, contrôle d'accès
+        par rôles (RBAC) et filtrage des données.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Laravel</span><span class="tag">Bootstrap</span><span class="tag">JavaScript</span><span class="tag">MySQL</span>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <div class="project-head">
+        <h3>Plateforme E-Commerce</h3>
+        <span class="project-year">2024</span>
+      </div>
+      <img class="project-cover" src="images/ecommerce-mockup.svg" alt="Aperçu de l'interface de la plateforme e-commerce" loading="lazy">
+      <p class="project-desc">
+        Site e-commerce complet avec gestion des produits et panier dynamique, pensé pour une
+        expérience d'achat fluide de la recherche au paiement.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Laravel</span><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">MySQL</span>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <div class="project-head">
+        <h3>Psychopalette</h3>
+        <span class="project-year">2024</span>
+      </div>
+      <div class="project-gallery">
+        <img class="project-thumb" src="images/psychopalette-accueil.png" alt="Page d'accueil de PsychoPalette" loading="lazy">
+        <img class="project-thumb" src="images/psychopalette-chatbot.png" alt="Conversation avec le chatbot PsychoPalette" loading="lazy">
+        <img class="project-thumb" src="images/psychopalette-resultats.png" alt="Résultats du test de personnalité PsychoPalette" loading="lazy">
+      </div>
+      <p class="project-desc">
+        Application web interactive pour tester et analyser les personnalités à travers les couleurs,
+        avec une expérience guidée et ludique.
+      </p>
+    <article class="project-card">
+      <div class="project-head">
+        <h3>Palestine Solidarité</h3>
+        <span class="project-year">2025</span>
+      </div>
+      <div class="project-gallery">
+        <img class="project-thumb" src="images/palestine-login.png" alt="Page de connexion du panneau d'administration Palestine Solidarité" loading="lazy">
+        <img class="project-thumb" src="images/palestine-dashboard.png" alt="Tableau de bord admin de la plateforme de don Palestine Solidarité" loading="lazy">
+      </div>
+      <p class="project-desc">
+        Plateforme de don en ligne avec dashboard admin : authentification sécurisée, suivi des dons
+        et des donateurs, gestion des projets et rapports en temps réel.
+      </p>
+      <div class="tag-row">
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">PHP</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- COMPETENCES -->
+<section id="competences" class="section">
+  <div class="eyebrow">~/competences</div>
+  <h2 class="section-title reveal">Compétences techniques</h2>
+  <p class="section-sub reveal">Du développement full-stack aux fondations réseau et sécurité.</p>
+
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <div class="skill-path">/securite-devops</div>
+      <div class="skill-tags">
+        <span class="tag">Docker</span><span class="tag">Hadoop</span><span class="tag">Linux</span><span class="tag">Bash</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-path">/reseaux-protocoles</div>
+      <div class="skill-tags">
+        <span class="tag">Cisco</span><span class="tag">Modèle OSI</span><span class="tag">TCP/IP</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-path">/frameworks-web</div>
+      <div class="skill-tags">
+        <span class="tag">Laravel</span><span class="tag">Spring Boot</span><span class="tag">Node.js</span><span class="tag">Flask</span><span class="tag">Angular</span><span class="tag">Bootstrap</span><span class="tag">TypeScript</span><span class="tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-path">/langages-bdd</div>
+      <div class="skill-tags">
+        <span class="tag">Java</span><span class="tag">Python</span><span class="tag">C++</span><span class="tag">SQL</span><span class="tag">MySQL</span><span class="tag">Oracle</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-path">/methodes-outils</div>
+      <div class="skill-tags">
+        <span class="tag">Cascade</span><span class="tag">Agile / Scrum</span><span class="tag">UML</span><span class="tag">Git / GitHub</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUES -->
+<section id="langues" class="section">
+  <div class="eyebrow">~/langues</div>
+  <h2 class="section-title reveal">Langues</h2>
+
+  <div class="lang-grid reveal">
+    <div class="lang-row">
+      <span class="lang-name">Arabe</span>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width:100%"></div></div>
+      <span class="lang-level">Maternelle</span>
+    </div>
+    <div class="lang-row">
+      <span class="lang-name">Français</span>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width:90%"></div></div>
+      <span class="lang-level">Courant</span>
+    </div>
+    <div class="lang-row">
+      <span class="lang-name">Anglais</span>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width:60%"></div></div>
+      <span class="lang-level">Intermédiaire</span>
+    </div>
+    <div class="lang-row">
+      <span class="lang-name">Espagnol</span>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width:25%"></div></div>
+      <span class="lang-level">Notions</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="eyebrow">~/contact</div>
+  <h2 class="section-title reveal">Contact</h2>
+  <p class="section-sub reveal">Ouverte aux stages, missions freelance et opportunités junior en développement &amp; cybersécurité.</p>
+
+  <div class="contact-wrap reveal">
+    <a class="contact-card" href="mailto:riahimayysa@gmail.com">
+      <div class="contact-icon">@</div>
+      <div>
+        <div class="contact-label">EMAIL</div>
+        <div class="contact-value">riahimayysa@gmail.com</div>
+      </div>
+    </a>
+    <a class="contact-card" href="tel:+21650325841">
+      <div class="contact-icon">☎</div>
+      <div>
+        <div class="contact-label">TÉLÉPHONE</div>
+        <div class="contact-value">+216 50 325 841</div>
+      </div>
+    </a>
+    <a class="contact-card" href="https://www.linkedin.com/in/mayysa-riahi-882627242" target="_blank" rel="noopener">
+      <div class="contact-icon">in</div>
+      <div>
+        <div class="contact-label">LINKEDIN</div>
+        <div class="contact-value">mayysa-riahi-882627242</div>
+      </div>
+    </a>
+    <a class="contact-card" href="https://github.com/mayssaRiahi" target="_blank" rel="noopener">
+      <div class="contact-icon">&lt;/&gt;</div>
+      <div>
+        <div class="contact-label">GITHUB</div>
+        <div class="contact-value">github.com/mayssaRiahi</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Riahi Mayssa — Tunis, Tunisie
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion) {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+  }
+
+  // Terminal boot sequence
+  const terminalBody = document.getElementById('terminalBody');
+  const lines = [
+    { text: '$ whoami', type: 'cmd' },
+    { text: 'riahi.mayssa — étudiante ingénieure, iTeam Université', type: 'out' },
+    { text: '', type: 'out' },
+    { text: '$ cat formation.log', type: 'cmd' },
+    { text: 'Licence Sciences Informatiques — ISSAT Mateur', type: 'out' },
+    { text: 'Mention Très Bien — Major de promotion', type: 'out' },
+    { text: '', type: 'out' },
+    { text: '$ cat stack.cfg', type: 'cmd' },
+    { text: 'Angular · Laravel · Spring Boot · Flask · Node.js · MySQL', type: 'out' },
+    { text: '', type: 'out' },
+    { text: '$ ./scan_profil --target=avenir', type: 'cmd' },
+    { text: 'Spécialisation : Sécurité Informatique / Cybersécurité', type: 'out' },
+    { text: '[████████████████████] 100%', type: 'out' },
+    { text: 'STATUT : ACCÈS AUTORISÉ ✓', type: 'status' },
+  ];
+
+  function typeTerminal() {
+    let lineIndex = 0;
+
+    function nextLine() {
+      if (lineIndex >= lines.length) {
+        const cursor = document.createElement('span');
+        cursor.className = 'term-cursor';
+        terminalBody.appendChild(cursor);
+        return;
+      }
+      const lineData = lines[lineIndex];
+      const lineEl = document.createElement('div');
+      lineEl.className = 'term-line term-' + lineData.type;
+      terminalBody.appendChild(lineEl);
+
+      if (lineData.text === '') {
+        lineIndex++;
+        setTimeout(nextLine, 120);
+        return;
+      }
+
+      if (reduceMotion) {
+        lineEl.textContent = lineData.text;
+        lineIndex++;
+        setTimeout(nextLine, 80);
+        return;
+      }
+
+      let charIndex = 0;
+      const speed = lineData.type === 'cmd' ? 38 : 12;
+      function typeChar() {
+        if (charIndex < lineData.text.length) {
+          lineEl.textContent += lineData.text[charIndex];
+          charIndex++;
+          setTimeout(typeChar, speed);
+        } else {
+          lineIndex++;
+          setTimeout(nextLine, 160);
+        }
+      }
+      typeChar();
+    }
+    nextLine();
+  }
+
+  typeTerminal();
+
+  // Lightbox for project screenshots
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  document.querySelectorAll('.project-thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      lightboxImg.src = thumb.src;
+      lightboxImg.alt = thumb.alt;
+      lightbox.classList.add('open');
+    });
+  });
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+  });
+
+</script>
+
+</body>
+</html>
